@@ -1,0 +1,32 @@
+
+ <!-- Modal -->
+ {% if session.col %}
+ <div class="modal hide fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add collection to {{session.col.database_name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form role="form" method="POST" action="{{ url_for('collection.create_new_collections',key = session.col.database_name)}}"> 
+                <div class="form-group">
+                <label class="label control-label">col name</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="text" class="form-control" name="col_name" placeholder="col name" required>       
+                </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <input id="btSubmit1" type="submit" class="btn btn-lg btn-primary"   value="Send" name ="submit" >
+                    <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Cancel</button>
+                  </div>
+                </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

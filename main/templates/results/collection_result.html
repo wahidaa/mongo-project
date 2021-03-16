@@ -1,0 +1,143 @@
+
+  {% extends 'base.html' %}
+
+  {% block title %}get documents{% endblock title %}
+  {% block content %}
+  <div>
+    {% set var = session.col.database_name + '_' + session.col.col_name %}
+    <span class="float-left" style="font-weight: bold; color: blue;" ><span>{{session.db.host}}</span>:{{session.db.port}}</span>
+    <br/>
+    <span class="float-left" style="font-weight: bold; " ><span style="color: blue;">{{session.col.database_name}}</span>.{{session.col.col_name}}</span>
+    <span class="float-right" style="font-weight: bold;" >Documents {{(g.current_col[2][var])}}</span>
+    <br/>
+    <span class="float-right" style="font-weight: bold;" >Indexes {{g.current_col[1][var]}}</span>
+    <br/>
+<style>
+    .verticalLine {
+  border-left: thick solid black;
+}
+</style>
+</div>
+  {% include 'macro.html' %} 
+  
+</br>  
+
+</br> 
+<div class="scroll">               
+                {% if colls|length != 0 %}        
+                <ul class="list-group">
+                  {% for i in colls %}
+                  <li class="list-group-item" style="word-wrap: break-word; font-size: 13px;">
+                    {% for key, value in i.items() %}
+                    {% if key == '_id' %}
+                    <b>{{key}}</b>:<mark class="red">ObjectId("{{value}}")</mark>
+                    <button class="current float-right" value="/manage_collection/{{session.col.database_name}}/{session.col.database_name}}/{{value}}/delete_one"  data-toggle="modal" data-target="#exampleModal3" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;
+                    outline:none;"  title="delete document" ><i class="fa fa-trash-o"></i></button>
+                    <button class="current7 float-right" data-toggle="modal" data-target="#exampleModal7" value="/manage_collection/{{session.col.database_name}}/{{session.col.col_name}}/{{value}}/update_one" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;
+                    outline:none;"  title="update document" ><i class="fa fa-edit"></i></button>
+                    {% else %}
+                    {% if value is string %}
+                    <b>{{key}}</b>:<mark class="blue">"{{value}}"</mark>
+                    {% else %}
+                    <b>{{key}}</b>:<mark class="blue">{{value}}</mark>
+                    {% endif %}
+                    {% endif %}
+                    <br />
+                    {% endfor %}
+                </li>
+                  {% endfor %}
+                </ul>
+                 {% else %}
+                    <h3> the collection is empty</h3>
+                {% endif %}
+</br>
+  <nav class="nav justify-content-center" >
+    <ul class="pagination" >
+      <li class="page-item"><a class="page-link" href="{{link_previous}}">Previous</a></li>
+    {%if page < 3 %}
+    {%for j in range(([max_pages,5]|sort)[0])%}
+      <li class="page-item"><a class="page-link" href="{{url_for('collection.get_ones',page=j+1, i=i , key = key)}}">{{j+1}}</a></li>
+    {%endfor%}
+    {% elif page >= 3 and page+2 <= max_pages %}
+    {%for j in range(-2,3,1)%}
+    <li class="page-item"><a class="page-link" href="{{url_for('collection.get_ones',page=page+j, i=i , key = key)}}">{{page+j}}</a></li>
+    {%endfor%}
+    {% elif 3 <= page <=4 and  max_pages <=5 %}
+    {%for j in range(max_pages)%}
+    <li class="page-item"><a class="page-link" href="{{url_for('collection.get_ones',page=j+1, i=i , key = key)}}">{{j+1}}</a></li>
+    {%endfor%}
+    {% elif page > 3 and page+2 > max_pages %}
+    {%for j in range(max_pages-4,max_pages+1,1)%}
+    <li class="page-item"><a class="page-link" href="{{url_for('collection.get_ones',page=j, i=i , key = key)}}">{{j}}</a></li>
+    {%endfor%}
+
+    {%endif%}
+
+      <li class="page-item"><a class="page-link" href="{{link_next}}">Next</a></li>
+      <li class="page-item" ><a class="page-link" style="color: black;" href="#">Of {{max_pages}}</a></li>
+    </ul>
+  </nav>
+</div>
+<br>
+<div class="row" style="display: flex;">
+  {% if (g.current_col[2][var]) == 0 %}
+    <button  data-toggle="modal" data-target="#exampleModal" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;
+    outline:none; margin:5px;"style="background-color:green; margin:5px;"  title="export collection" disabled> 
+      export collection</button>
+  {% else %}
+    <button  data-toggle="modal" data-target="#exampleModal"  style="background-color:green; margin:5px;"  title="export collection">  export collection</button>
+  {% endif %}
+<button data-toggle="modal" data-target="#exampleModal1" style="background-color:green; margin:5px;" title="export collection"> 
+  import file</button>
+</div>
+<br>
+{% include 'choice/update.html' %}
+{% include 'choice/delete_one_document.html' %}
+{% include 'choice/insert_csv_file.html' %}  
+{% include 'choice/export_file.html' %}
+<style>
+  mark.blue {
+    color: blue;
+}
+mark.red {
+    color: red;
+ 
+}
+.scroll {
+  height:550px;
+  overflow-y: scroll;
+}
+</style>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+  </script>
+
+<script>
+  function showDiv(divId, element)
+{
+  document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+}
+</script>
+<style>
+  #hidden_div {
+  display: none;
+}
+</style>
+<script>
+$(".current").click(function()
+{
+    link=$(this).val()
+    action=$("#exampleModal3").find('form ').attr('action',link);
+    console.log(db)
+    });
+
+$(".current7").click(function()
+{
+    link=$(this).val()
+    action=$("#exampleModal7").find('form ').attr('action',link);
+    console.log(db)
+    });
+</script>
+{% endblock content %}

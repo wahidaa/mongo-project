@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    {% set var = session.col.database_name + '_' + session.col.col_name %}
+    <span class="float-left" style="font-weight: bold; color: blue;" ><span>{{session.db.host}}</span>:{{session.db.port}}</span>
+    <br/>
+    <span class="float-left" style="font-weight: bold; " ><span style="color: blue;">{{session.col.database_name}}</span>.{{session.col.col_name}}</span>
+    <span class="float-right" style="font-weight: bold;" >Documents {{(g.current_col[2][var])}}</span>
+    <br/>
+    <span class="float-right" style="font-weight: bold;" >Indexes {{g.current_col[1][var]}}</span>
+    <br/>
+</div>
+{% include 'macro.html' %}  
+
+<form role="form" method="POST" action="{{ url_for('collection.get_ones', key = key ,i=i)}}">   
+<div class="form-group">
+<label class="label control-label">col name</label>
+<div class="input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+    <input type="text" class="form-control" name="col_name" placeholder="col name" required>    
+</div>
+</div>
+<input type="submit" class="btn btn-lg btn-primary"   value="Send Query" name ="submit"> 
+</form>
+{% endblock content %}
+                                         
+  
+  

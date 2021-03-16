@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}home{% endblock title %}
+
+{% block content %}
+<div class="mx-auto" style="width: 400px;">
+            <h2 class="text-center">Add User</h2>
+        <form  role="form" method="POST" action="{{ url_for('client.signup_logins')}}">
+            <label class="required">first_name</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" class="form-control" name="first_name" placeholder="first_name" required>
+                <style>.required:after {content:" *"; color: red;} </style>
+            </div>
+            <label class="required">last_name</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" class="form-control" name="last_name" placeholder="last_name" required>
+  
+            </div>
+            <label class="required">Email</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                <input type="email" class="form-control" name="email" placeholder="Email" required>
+            </div>
+                <label for="sel1">user type</label>
+                <select class="form-control" id="sel1" name="user type">
+                  <option>user</option>
+                  <option>administrator</option>
+                </select>     
+            <label class="required">user_name</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" class="form-control" name="user_name" placeholder="user_name" required>
+    
+            </div>
+            <label class="required">password</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                <input type="password" class="form-control" name="password" placeholder="password" required>
+            </div> 
+        </br>
+
+            <input type="submit" value="Sign Up" class="btn btn-lg btn-primary" name = "submit">
+            
+        </div>
+        </form>
+     
+    </div> 
+ 
+{% endblock content %}

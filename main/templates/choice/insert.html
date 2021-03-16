@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    {% set var = session.col.database_name + '_' + session.col.col_name %}
+    <span class="float-left" style="font-weight: bold; color: blue;" ><span>{{session.db.host}}</span>:{{session.db.port}}</span>
+    <br/>
+    <span class="float-left" style="font-weight: bold; " ><span style="color: blue;">{{session.col.database_name}}</span>.{{session.col.col_name}}</span>
+    <span class="float-right" style="font-weight: bold;" >Documents {{session.col.count}}</span>
+    <br/>
+    <span class="float-right" style="font-weight: bold;" >Indexes {{g.current_col[1][var]}}</span>
+</div>
+{% include 'macro.html' %} 
+
+<div class="row">
+    <div class="col">    
+<br />
+<form role="form" method="POST" action="{{ url_for('collection.inserts',database_name = database_name, col_name = col_name)}}"> 
+<div class="form-group">
+<label class="label control-label">Document</label>
+<div class="input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+    <input input onkeyup="manage_insert(this)" id="txt_insert" type="text" class="form-control" name="query" placeholder="{ 'key':'value',... }" pattern='(\s*){0,20}\{(\s*){0,20}(((\s*){0,20}"(\s*){0,20}([a-zA-Z0-9._%+-]+)(\s*){0,20}"(\s*){0,20}:(\s*){0,20}(?:(?=([+-]?([0-9]*[.])?[0-9]+))([+-]?([0-9]*[.])?[0-9]+)|(\s*){0,20}"(\s*){0,20}([a-zA-Z0-9._%+-]+)(\s*){0,20}")),(\s*){0,20})*("(\s*){0,20}([a-zA-Z0-9._%+-]+)(\s*){0,20}"(\s*){0,20}:(\s*){0,20}(?:(?=([+-]?([0-9]*[.])?[0-9]+))([+-]?([0-9]*[.])?[0-9]+)|(\s*){0,20}"(\s*){0,20}([a-zA-Z0-9._%+-]+)(\s*){0,20}"(\s*){0,20})){1}(\s*){0,20}\}(\s*){0,20}' required>       
+</div>
+</div>
+<br/>
+<input id="bt_insert" type="submit" class="btn btn-lg btn-primary"   value="Send Query" name ="submit" disabled/>
+</form> 
+    </div>
+    <div class="col scroll" style="width: 50px;"> 
+
+    </br>                   
+    {% if colls|length != 0 %}        
+    <ul class="list-group">
+      {% for i in colls %}
+      <li class="list-group-item disabled" style="word-wrap: break-word; font-size: 13px;">
+        {% for key, value in i.items() %}
+        {% if key == '_id' %}
+        <b>{{key}}</b>:<mark class="red">ObjectId("{{value}}")</mark>
+        {% else %}
+        {% if value is string %}
+        <b>{{key}}</b>:<mark class="blue">"{{value}}"</mark>
+        {% else %}
+        <b>{{key}}</b>:<mark class="blue">{{value}}</mark>
+        {% endif %}
+        {% endif %}
+        <br />
+        {% endfor %}
+      </li>
+      {% endfor %}
+    </ul>
+    
+    
+     {% else %}
+        <h3> the collection is empty</h3>
+    {% endif %}
+    </br>
+    <nav class="nav justify-content-center" >
+    <ul class="pagination" >
+    <li class="page-item"><a class="page-link" href="{{link_previous}}">Previous</a></li>
+    {%if page < 3 %}
+    {%for j in range(([max_pages,5]|sort)[0])%}
+    <li class="page-item"><a class="page-link" href="{{url_for('collection.inserts',page=j+1, col_name=i , database_name = key)}}">{{j+1}}</a></li>
+    {%endfor%}
+    {% elif page >= 3 and page+2 <= max_pages %}
+    {%for j in range(-2,3,1)%}
+    <li class="page-item"><a class="page-link" href="{{url_for('collection.inserts',page=page+j, col_name=i , database_name = key)}}">{{page+j}}</a></li>
+    {%endfor%}
+    {% elif 3 <= page <=4 and  max_pages <=5 %}
+    {%for j in range(max_pages)%}
+    <li class="page-item"><a class="page-link" href="{{url_for('collection.inserts',page=j+1, col_name=i , database_name = key)}}">{{j+1}}</a></li>
+    {%endfor%}
+    {% elif page > 3 and page+2 > max_pages %}
+    {%for j in range(max_pages-4,max_pages+1,1)%}
+    <li class="page-item"><a class="page-link" href="{{url_for('collection.inserts',page=j, col_name=i , database_name = key)}}">{{j}}</a></li>
+    {%endfor%}
+    
+    {%endif%}
+    
+    <li class="page-item"><a class="page-link" href="{{link_next}}">Next</a></li>
+    <li class="page-item" ><a class="page-link" style="color: black;" href="#">Of {{max_pages}}</a></li>
+    </ul>
+    </nav>
+    </div>
+</div> 
+</div> 
+{% endblock content %}

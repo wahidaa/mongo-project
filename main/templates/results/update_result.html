@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}get collection{% endblock title %}
+{% block content %}
+<div>
+  {% set var = session.col.database_name + '_' + session.col.col_name %}
+  <span class="float-left" style="font-weight: bold; color: blue;" ><span>{{session.db.host}}</span>:{{session.db.port}}</span>
+  <br/>
+  <span class="float-left" style="font-weight: bold; " ><span style="color: blue;">{{session.col.database_name}}</span>.{{session.col.col_name}}</span>
+  <span class="float-right" style="font-weight: bold;" >Documents {{(g.current_col[2][var])}}</span>
+  <br/>
+  <span class="float-right" style="font-weight: bold;" >Indexes {{g.current_col[1][var]}}</span>
+  <br/>
+<style>
+  .verticalLine {
+border-left: thick solid black;
+}
+</style>
+</div>
+{% include 'macro.html' %}
+</br>
+<div class="row">
+  <div class="col">
+    <form role="form" method="POST" action="{{ url_for('collection.update_many_collections',database_name = database_name, col_name = col_name)}}"> 
+      <label class="label control-label">query</label>
+      <div class="input-group">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+          <input input onkeyup="manage_update_mn(this)" id="txt1" type="text" class="form-control" name="query" placeholder='{ "field": { "$regex": "pattern" } }' pattern =  '(\s*){0,20}\{(\s*){0,20}"(\s*){0,20}([a-zA-Z0-9._%+-]+)(\s*){0,20}"(\s*){0,20}:(\s*){0,20}\{(\s*){0,20}"(\s*){0,20}([$regex]+)(\s*){0,20}"(\s*){0,20}:(\s*){0,20}"(\s*){0,20}(.{1,50})(\s*){0,20}"(\s*){0,20}\}(\s*){0,20}\}(\s*){0,20}' required>       
+      </div>
+      <label class="label control-label">new values</label>
+      <div class="input-group">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+          <input input onkeyup="manage_update_mn(this)" id="txt2" type="text" class="form-control" name="new_values" placeholder='{ "$set": { "key":"value" } }' pattern = '(\s*){0,20}\{(\s*){0,20}"(\s*){0,20}([$set]+)(\s*){0,20}"(\s*){0,20}:(\s*){0,20}\{(\s*){0,20}"(\s*){0,20}([a-zA-Z0-9._%+-]+)(\s*){0,20}"(\s*){0,20}:(\s*){0,20}(?:(?=([+-]?([0-9]*[.])?[0-9]+))([+-]?([0-9]*[.])?[0-9]+)(\s*){0,20}|(\s*){0,20}"(\s*){0,20}([a-zA-Z0-9._%+-]+)(\s*){0,20}"(\s*){0,20})(\s*){0,20}\}(\s*){0,20}\}(\s*){0,20}' required>       
+      </div>
+      <br/>
+      <input id="bt_update_mn"  type="submit" class="btn btn-lg btn-primary"   value="Send Query" name ="submit" disabled/>
+      </form>
+          </div>
+<div class="col scroll" style="width: 50px;">
+      </br>                   
+      {% if colls_result|length != 0 %} 
+      <h5>update {{colls_result|length}} documents</h5>       
+      <ul class="list-group">
+        {% for i in colls_result %} 
+        <li class="list-group-item disabled" style="word-wrap: break-word; font-size: 13px;">
+          {% for key, value in i.items() %}
+          {% if value is string %}
+          <b>{{key}}</b>:<mark class="blue">"{{value}}"</mark>
+          {% else %}
+          <b>{{key}}</b>:<mark class="blue">{{value}}</mark>
+          {% endif %}
+          <br />
+          {% endfor %}
+        </li>
+        {% endfor %}
+      </ul>
+       {% else %}
+       <h3>No result</h3>
+       <hr/>
+     <span>Try to modify your query to get results</span>
+      {% endif %}
+    </br>  
+     
+</div>
+</div>
+{% endblock content %}

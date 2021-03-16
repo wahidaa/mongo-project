@@ -1,0 +1,62 @@
+.scroll {
+    height:550px;
+    overflow-y: scroll;
+  }
+  .center {
+  
+  margin: auto;
+  width: 90%;
+  
+  }
+  
+  .nav-link[data-toggle].collapsed:before {
+  content: " ▾";
+  color: white;
+  }
+  .nav-link[data-toggle]:not(.collapsed):before {
+      content: " ▴";
+      color: white;
+  }
+  .d-none.d-sm-inline{
+      color : white;
+  }
+  .fa.fa-database {
+      color: white;
+  }
+  .fa.fa-home{
+      color: white;
+  }
+  .fa.fa-link{
+      color: white;
+  }
+  .fa.fa-user{
+      color: white;
+  }
+  .nav-link.collapsed.py-1{
+      color: white;
+  }
+  .nav-link.py-0{
+      color: white;
+  }
+  .btn.btn-lg.btn-primary{
+      background-color:black;
+      color:white;
+  }
+  
+  .fa.fa-user-plus{
+      color: white;
+
+
+  }
+
+    mark.blue {
+        color: blue;
+        }
+        mark.red {
+        color: red;
+        
+        }
+        .scroll {
+          height:550px;
+          overflow-y: scroll;
+        }

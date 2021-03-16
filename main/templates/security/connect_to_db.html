@@ -1,0 +1,43 @@
+
+{% extends 'base.html' %}
+
+{% block title %}connect to database{% endblock title %}
+{% block content %}
+
+
+
+<div class="mx-auto" style="width: 400px;">
+	<h2 class="text-center">Connect to Database</h2>
+<form role="form" method="POST" action="{{ url_for('databaseinfo.connect_to_dbs')}}">
+	<label class="required">database port</label>
+	<div class="input-group">
+		<span class="input-group-addon"></span>
+		<input type="number" class="form-control" name="database_port" placeholder="database port"required>
+			<style>.required:after {content:" *"; color: red;} </style>
+	</div>
+	<label class="required">database host</label>
+	<div class="input-group">
+		<span class="input-group-addon"></span>
+		<input type="text" class="form-control" name="database_host" placeholder="database host"required>
+	</div>
+	<label class="label control-label">user name</label>
+	<div class="input-group">
+		<span class="input-group-addon"></span>
+		<input type="text" class="form-control" name="user_name" placeholder="user name">
+	</div>
+	<label class="label control-label">password</label>
+	<div class="input-group">
+		<span class="input-group-addon"></span>
+		<input type="password" class="form-control" name="password" placeholder="password">
+	</div>
+	{% if session.db %}
+</br>
+	<input type="submit" class="btn btn-lg btn-primary"   value="Connect" name = "submit" disabled/>
+	{% else %}
+</br>
+	<input style="display: block; margin: 0 auto;" type="submit" class="btn btn-lg btn-primary"   value="Connect" name = "submit">
+	
+	{% endif %}
+	</form>   
+</div>
+{% endblock content %}

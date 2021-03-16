@@ -1,0 +1,52 @@
+<div style="background-color: white; border-radius: 25px; moz-box-shadow:inset 0 0 10px #000000; webkit-box-shadow: inset 0 0 10px #000000;
+box-shadow:inset 0 0 10px #000000;">
+
+    <nav class="navbar navbar-default">
+        <a class="nav-link"href="{{url_for('collection.get_ones', key = session.col.database_name ,i=session.col.col_name )}}" role="button">Documents</a>
+        <div class="btn-group">
+            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" >Filter<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{url_for('collection.filters',database_name = session.col.database_name, col_name = session.col.col_name)}}" role="button">filter based on fields</a></li>
+                <li><a class="dropdown-item" href="{{url_for('collection.filters_',database_name = session.col.database_name, col_name = session.col.col_name)}}" role="button">filter by id</a></li>
+                <li><a class="dropdown-item"  href="{{url_for('collection.filter_comparisons',database_name = session.col.database_name, col_name = session.col.col_name)}}" role="button">filter based on comparison operator</a></li>
+                <li><a class="dropdown-item"  href="{{url_for('collection.filter_logicals',database_name = session.col.database_name, col_name = session.col.col_name)}}" role="button">filter based on logical operator</a></li>
+                <li><a class="dropdown-item"  href="{{url_for('collection.filter_regulars',database_name = session.col.database_name, col_name = session.col.col_name)}}" role="button">filter with regular expression</a></li>
+            </ul>
+        </div>
+        <a class="nav-link"href="{{url_for('collection.agregates',database_name = session.col.database_name, col_name = session.col.col_name)}}" role="button">Aggregate</a>
+        <a class="nav-link"  href="{{url_for('collection.update_many_collections',database_name = session.col.database_name, col_name = session.col.col_name)}}" role="button">Update Many</a>
+        <div class="btn-group">
+            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" >Insert<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item"href="{{url_for('collection.inserts',database_name = session.col.database_name, col_name = session.col.col_name)}}" role="button">Insert One Document</a></li>
+                <li><a class="dropdown-item"  href="{{url_for('collection.inserts_collection',database_name = session.col.database_name, col_name = session.col.col_name)}}" role="button">Insert Many Documents</a></li>        
+            </ul>
+        </div>
+        <a class="nav-link"  href="{{url_for('collection.delete_many_documents',database_name = session.col.database_name, col_name = session.col.col_name)}}" role="button">Delete Many</a>
+    </nav>
+
+</div>
+    <style>
+.btn.btn-default.dropdown-toggle{
+    color: black;
+}
+.nav-link{
+    color:black;
+}
+/* Hover */
+.navbar a:hover {
+    border-bottom: 1px solid currentColor !important;
+}
+/* Active */
+.navbar .active-link a {
+    border-bottom: 1px solid currentColor;
+}
+.navbar {
+  background-color: transparent;
+  border: none;
+  transition: background-color 1s ease 0s;
+}
+    </style>
+
+
+

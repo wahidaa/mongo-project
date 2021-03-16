@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}filter documents{% endblock title %}
+{% block content %}
+<div>
+  {% set var = session.col.database_name + '_' + session.col.col_name %}
+  <span class="float-left" style="font-weight: bold; color: blue;" ><span>{{session.db.host}}</span>:{{session.db.port}}</span>
+  <br/>
+  <span class="float-left" style="font-weight: bold; " ><span style="color: blue;">{{session.col.database_name}}</span>.{{session.col.col_name}}</span>
+  <span class="float-right" style="font-weight: bold;" >Documents {{session.col.count}}</span>
+  <br/>
+  <span class="float-right" style="font-weight: bold;" >Indexes {{g.current_col[1][var]}}</span>
+  <br/>
+</div>
+{% include 'macro.html' %}
+<div class="row">
+  <div class="col">
+        <br />
+    <div>
+    <form role="form" method="POST" action="{{url_for('collection.filters_',database_name = database_name, col_name = col_name)}}">  
+
+
+    <input id="txt" type="text" class="form-control" name="input_field" placeholder='_id' required>     
+
+    <br />
+
+    <div id = "demo">
+    </div>
+    <br />
+    <input  id="btSubmit1" type="submit" class="btn btn-lg btn-primary"   value="Send Query" name ="Send Query" >
+
+    </form> 
+    </div>
+      
+  </div>
+  <div class="col" style="width: 50px;">
+  </br>                   
+  {% if colls|length != 0 %}        
+  <ul class="list-group">
+    {% for i in colls %}
+    <li class="list-group-item" style="word-wrap: break-word; font-size: 13px;">
+      {% for key, value in i.items() %}
+      {% if key == '_id' %}
+      <b>{{key}}</b>:<mark class="red">ObjectId("{{value}}")</mark>
+      <button  class="current float-right" value="/manage_collection/{{session.col.database_name}}/{session.col.database_name}}/{{value}}/delete_one"  data-toggle="modal" data-target="#exampleModal3" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;
+      outline:none;" title="delete document" ><i class="fa fa-trash-o"></i></button>
+      <button class="current7 float-right" data-toggle="modal" data-target="#exampleModal7" value="/manage_collection/{{session.col.database_name}}/{{session.col.col_name}}/{{value}}/update_one" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;
+      outline:none;" title="update document" ><i class="fa fa-edit"></i></button>
+      {% else %}
+      {% if value is string %}
+      <b>{{key}}</b>:<mark class="blue">"{{value}}"</mark>
+      {% else %}
+      <b>{{key}}</b>:<mark class="blue">{{value}}</mark>
+      {% endif %}
+      {% endif %}
+      <br />
+      {% endfor %}
+    </li>
+    {% endfor %}
+  </ul>
+
+
+   {% else %}
+   <h3>No result</h3>
+   <hr/>
+ <span>Try to modify your query to get results</span>
+  {% endif %}
+</br>    
+    </div>
+  </div>
+  {% include 'choice/update.html' %}
+  {% include 'choice/delete_one_document.html' %}
+
+  <script>
+    $(".current").click(function()
+    {
+        link=$(this).val()
+        action=$("#exampleModal3").find('form ').attr('action',link);
+        console.log(db)
+        });
+    
+    $(".current7").click(function()
+    {
+        link=$(this).val()
+        action=$("#exampleModal7").find('form ').attr('action',link);
+        console.log(db)
+        });
+    </script>
+{% endblock content %}

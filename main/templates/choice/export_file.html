@@ -1,0 +1,33 @@
+ <!-- Modal -->
+ {% if session.col %}
+ <div class="modal hide fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Export Collection {{session.col.database_name}}.{{session.col.col_name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form role="form" method="POST" action="{{ url_for('collection.export_files',database_name = session.col.database_name, col_name = session.col.col_name)}}">
+  
+            <div class="form-group">
+                <select type="text" class="form-control" id="test" name="form_select" onchange="showDiv('hidden_div', this)" required>
+                <option value="" selected disabled>Please select</option>
+                  <option value="1">Export Query with filters</option>
+                  <option value="0">Export Full Collection</option>
+                </select>
+                <br/>
+                <div id="hidden_div">
+                    <input id="txt" type="text" class="form-control" name="input_field" placeholder='{"field":"value"}'>  
+                </div>
+                <br/> 
+              <button  type="submit" class="btn btn-lg btn-primary" value="export_csv" name ="export_csv">Export csv</button>
+              <button type="submit" class="btn btn-lg btn-primary" value="export_json" name ="export_json">Export json</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,54 @@
+
+{% extends 'base.html' %}
+{% block title %}get collection{% endblock title %}
+{% if 'db' not in session.keys() %}
+{% block content %} 
+</br> 
+<span class="float-left" style="font-weight: bold; color: blue;" ><span>{{session.db.host}}</span>:{{session.db.port}}</span>
+<br/>
+<hr/>
+<button data-toggle="modal" data-target="#exampleModal5" style="background-color:green" style="background-color:green; border-color:transparent;" data-toggle="tooltip" title="add new database"> 
+CREATE DATABASE</button>
+<h2 class ="text-center">Databases</h2>
+</br>
+<span class="float-right" style="font-weight: bold;"> {{g.current_col[0].items()|length}} DBS</span>
+</br>
+</br>
+                <div class="container">
+                  
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      {% if g.current_col[0].items()|length != 0 %}
+                      <thead class="thead-dark">
+                        <tr>
+                          <th>id</th>
+                          <th>Database Name</th>
+                          <th>Collections</th>
+                        </tr>
+                      </thead>
+                      {% endif %}
+                      <tbody>
+                        {% if g.current_col[0].items()|length == 0 %}
+                        <tr><td>
+                        <span> There Is No Database</span>
+                      </td></tr>
+                      {% else %}
+                        {% for database_name,value in g.current_col[0].items() %}
+                        <tr>
+                          <td>{{ loop.index }}</td>
+                          <td><a href="{{ url_for('collection.get_all_collections',database_name = database_name)}}">{{ database_name }}</a>
+                            <button class="float-right current6" value="/{{database_name}}/delete_database" data-toggle="modal" data-target="#exampleModal6" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;
+                            outline:none;"   title="delete database" ><i class="fa fa-trash-o"></i></button></td>
+                                                           
+                          <td>{{value|length}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+{% include 'choice/add_database.html' %}
+{% include 'choice/delete_one_database.html' %}
+{% endblock content %}
+{% endif %}

@@ -1,0 +1,282 @@
+<html>
+<title>{% block title %}{% endblock title %}</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container-fluid">    
+    <div class="row">
+        {% if session.user %}
+        <div class="col-2 show d-md-flex bg-dark pt-2 pl-0 min-vh-100 col-2" id="sidebar">
+
+            <ul class="nav flex-column flex-nowrap overflow-hidden">
+                <div class="dropdown-divider"></div>
+                <li><span style="color:white;">MongoDB Database Management</span></li>
+                <div class="dropdown-divider"></div>
+                <br/>
+               <li class="nav-item">
+  
+                <a style="color: white;" class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#subm">
+            {{g.current_user[2]}}
+            <svg height="20pt" viewBox="0 0 512 512" width="20pt" xmlns="http://www.w3.org/2000/svg"><path d="m512 256c0 141.386719-114.613281 256-256 256s-256-114.613281-256-256 114.613281-256 256-256 256 114.613281 256 256zm0 0" fill="#27488f"/><path d="m339.617188 498.015625c100.320312-34.652344 172.382812-129.914063 172.382812-242.015625 0-2.109375-.027344-4.210938-.078125-6.304688l-147.914063-147.917968-232.269531 160.222656 73.53125 73.53125-17.890625 10.25zm0 0" fill="#12254c"/><path d="m294.5 373.644531v-25.644531h-77v25.644531c0 11.621094-7.269531 22.003907-18.1875 25.980469l-118.398438 43.117188c45.785157 42.945312 107.359376 69.257812 175.085938 69.257812s129.300781-26.3125 175.085938-69.257812l-118.398438-43.117188c-10.917969-3.976562-18.1875-14.359375-18.1875-25.980469zm0 0" fill="#faa68e"/><path d="m431.085938 442.742188-118.398438-43.117188c-10.917969-3.976562-18.1875-14.359375-18.1875-25.980469v-25.644531h-38.691406v163.996094c.066406 0 .128906.003906.191406.003906 67.726562 0 129.300781-26.3125 175.085938-69.257812zm0 0" fill="#e09380"/><path d="m189.410156 239.902344c0 18.265625-14.804687 33.074218-33.070312 33.074218s-33.070313-14.808593-33.070313-33.074218c0-18.261719 14.804688-33.070313 33.070313-33.070313s33.070312 14.808594 33.070312 33.070313zm0 0" fill="#ffbeaa"/><path d="m388.730469 239.902344c0 18.265625-14.804688 33.074218-33.070313 33.074218s-33.070312-14.808593-33.070312-33.074218c0-18.261719 14.804687-33.070313 33.070312-33.070313s33.070313 14.808594 33.070313 33.070313zm0 0" fill="#faa68e"/><path d="m300.03125 363.714844-22.082031 11.34375c-13.777344 7.078125-30.121094 7.078125-43.898438 0l-22.082031-11.34375c-32.726562-16.8125-53.300781-50.511719-53.300781-87.304688v-86.074218c0-53.757813 43.574219-97.335938 97.332031-97.335938s97.332031 43.578125 97.332031 97.332031v86.078125c0 36.792969-20.574219 70.492188-53.300781 87.304688zm0 0" fill="#ffbeaa"/><path d="m256 93c-.0625 0-.128906.003906-.191406.003906v287.355469c7.59375.03125 15.191406-1.734375 22.136718-5.300781l22.085938-11.34375c32.726562-16.8125 53.300781-50.515625 53.300781-87.304688v-86.078125c0-53.753906-43.574219-97.332031-97.332031-97.332031zm0 0" fill="#faa68e"/><path d="m314.257812 81.667969h-10.09375c-4.082031 0-7.644531 2.199219-9.589843 5.46875-1.652344-3.242188-5.015625-5.46875-8.910157-5.46875h-70.164062c-47.21875 0-85.5 38.277343-85.5 85.5 0 16.65625 7.128906 31.648437 18.5 42.097656v68.234375h20v-56.300781c5.851562 2.019531 12.128906 3.132812 18.667969 3.132812h51.332031c25.949219 0 47.847656-17.292969 54.828125-40.980469 2.695313 23.074219 22.300781 40.980469 46.097656 40.980469 1.375 0 2.730469-.070312 4.074219-.1875v53.355469h20v-59.886719c13.398438-8.144531 22.351562-22.878906 22.351562-39.707031v-24.644531c0-39.542969-32.050781-71.59375-71.59375-71.59375zm0 0" fill="#ffe000"/><path d="m314.257812 81.667969h-10.09375c-4.082031 0-7.644531 2.199219-9.589843 5.46875-1.652344-3.242188-5.015625-5.46875-8.910157-5.46875h-29.855468v139.984375c18.015625-5.722656 32.164062-20.125 37.519531-38.300782 2.699219 23.074219 22.300781 40.980469 46.097656 40.980469 1.375 0 2.730469-.070312 4.074219-.1875v53.355469h20v-59.886719c13.402344-8.144531 22.351562-22.878906 22.351562-39.707031v-24.644531c0-39.542969-32.050781-71.59375-71.59375-71.59375zm0 0" fill="#ffc200"/><path d="m312.6875 399.625c-5.308594-1.933594-9.746094-5.390625-12.914062-9.761719l-43.773438 32.46875-43.773438-32.46875c-3.167968 4.371094-7.605468 7.824219-12.914062 9.757813l-118.398438 43.121094c45.785157 42.945312 107.359376 69.257812 175.085938 69.257812s129.300781-26.3125 175.085938-69.257812zm0 0" fill="#dbeeff"/><path d="m431.085938 442.742188-118.398438-43.117188c-5.308594-1.933594-9.746094-5.390625-12.914062-9.761719l-43.773438 32.46875-.191406-.140625v89.804688c.066406 0 .128906.003906.191406.003906 67.726562 0 129.300781-26.3125 175.085938-69.257812zm0 0" fill="#bfe1ff"/><path d="m268 461.707031h-24l-10-39.332031h44zm0 0" fill="#27488f"/><path d="m278 422.375h-22.191406v39.332031h12.191406zm0 0" fill="#12254c"/><path d="m236.710938 511.277344c6.367187.476562 12.800781.722656 19.289062.722656s12.921875-.246094 19.289062-.722656l-7.289062-49.570313h-24zm0 0" fill="#27488f"/><path d="m275.289062 511.277344-7.289062-49.570313h-12.191406v50.289063c.066406 0 .128906.003906.191406.003906 6.488281 0 12.921875-.246094 19.289062-.722656zm0 0" fill="#12254c"/><path d="m256 422.332031-36.332031 40-30.257813-63.332031 16.257813-14zm0 0" fill="#fff"/><path d="m189.410156 399-110.746094 41.617188c37.222657 35.761718 85.226563 60.378906 138.660157 68.476562zm0 0" fill="#4a7aff"/><path d="m256 422.332031 36.332031 40 30.257813-63.332031-16.257813-14zm0 0" fill="#e9edf5"/><path d="m433.335938 440.617188-110.746094-41.617188-27.914063 110.09375c53.433594-8.097656 101.4375-32.714844 138.660157-68.476562zm0 0" fill="#27488f"/><path d="m217.324219 509.09375-27.914063-110.09375-37.078125 63.332031 37.078125 18.667969-10.96875 19.027344c12.570313 3.992187 25.554688 7.046875 38.882813 9.066406zm0 0" fill="#27488f"/><path d="m294.675781 509.09375 27.914063-110.09375 37.078125 63.332031-37.078125 18.667969 10.96875 19.027344c-12.570313 3.992187-25.554688 7.046875-38.882813 9.066406zm0 0" fill="#12254c"/></svg>
+        </a>
+        <div class="collapse" id="subm" aria-expanded="false">
+            <ul class="flex-column pl-2 nav">
+                    {% if session.user %}
+                    <li class="nav-item"><a  class="nav-link py-0" href="{{url_for('client.logouts')}}" role="button"><span>Logout</span></a></li>
+                    {% if session.user and session.db %}
+                    <div class="dropdown-divider"></div>
+                    <li class="nav-item"><a  class="nav-link py-0" href="{{url_for('databaseinfo.db_logouts')}}" role="button"><span>db logout</span></a></li>
+                    <div class="dropdown-divider"></div>
+                    {% endif %}
+                    {% endif %}
+                </ul>
+                </div>
+                 </li>
+                {% endif %}
+                    <br/>
+                {% if 'db' not in session.keys()|list and session.user %}
+                <li class="nav-item">
+                    <a class="nav-link collapsed text-truncate" href="#submenu5" data-toggle="collapse" data-target="#submenu5"><i class="fa fa-link"></i> <span class="d-none d-sm-inline">Recent Connections </span></a>
+                    <div class="collapse" id="submenu5" aria-expanded="false">
+                        {% if g.current_connect %}
+                        <ul class="flex-column pl-2 nav">
+                            {% for i in g.current_connect %} 
+                            <li class="nav-item"><a class="nav-link py-0" href="{{ url_for('databaseinfo.recent_connections',database_host = i[0],database_port = i[1])}}"><span>{{i[0]}}:{{i[1]}}</span></a></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {% elif session.db %}
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item">
+                            <a class="nav-link collapsed text-truncate" href="#submenu5" data-toggle="collapse" data-target="#submenu5"> <span class="d-none d-sm-inline">{{session.count_db}} <span style="color: black;"><b>dbs</b></span> &nbsp; {{session.count_col}}  <span style="color: black;"><b>collections</b></span> </span></a>
+                            <div class="collapse" id="submenu5" aria-expanded="false">
+                                <ul class="flex-column pl-2 nav">
+                                    <li class="nav-item">
+                                        <b>HOST</b>
+                                        <br/>
+                                        <span style="color: white;">{{session.db.host}}:{{session.db.port}}</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <b>EDITION</b>
+                                        <br/>
+                                        <span style="color: white;">MongoDB {{session.version}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                {% endif %}
+                {% if session.db and session.user %}
+                <li class="nav-item">
+                    <a class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu2"><i class="fa fa-database"></i> <span class="d-none d-sm-inline">Databases</span></a>
+                    <div class="collapse" id="submenu2" aria-expanded="false">
+                        <ul class="flex-column pl-2 nav">
+                            <li class="nav-item">
+                                {% if g.current_col %}
+                                {% for key, value in g.current_col[0].items() %}
+                                <br/>
+                                <a class="nav-link collapsed py-1 current_db" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1{{key}}" >{{key}}
+                                    <button class="current" name="{{key}}" value="/manage_collection/{{key}}/create_col" data-toggle="modal" data-target="#exampleModal2" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;
+                                    outline:none;" style="background-color:transparent; border-color:transparent;" title="add new collection"> 
+                                        <i style="font-size:10px" class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                    <button class = "current0" value="/{{key}}/delete_database" data-toggle="modal" data-target="#exampleModal6"style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;
+                                    outline:none;" title="delete database" ><i class="fa fa-trash-o"></i></button>
+                                </a>
+
+                                <div class="collapse" id="submenu1sub1{{key}}" aria-expanded="false">
+                                    <ul class="flex-column nav pl-4">
+                                        <li class="nav-item">
+                                            {% for i in value %}
+                                            <a class="nav-link py-0" href="{{url_for('collection.get_ones', key = key ,i=i )}}">
+                                                {{i}} 
+                                            </a>
+                                                <button class= "current2" value= "/manage_collection/{{key}}/{{i}}/delete" data-toggle="modal" data-target="#exampleModal4"  style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;
+                                                outline:none;" title="delete collection" ><i class="fa fa-trash-o"></i></button>    
+                                            {% endfor %}
+                                            </li>
+                                    </ul>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </li>
+
+                        </ul>
+                    </div>
+                </li> 
+                {% endif %} 
+
+                {% if g.current_user[1] == 'administrator' %}
+                
+                <li class="nav-item">
+                    <a class="nav-link collapsed text-truncate" href="#submenu5" data-toggle="collapse" data-target="#submenu9"><i class="fa fa-user"></i> <span class="d-none d-sm-inline">User Informations</span></a>
+                    <div class="collapse" id="submenu9" aria-expanded="false">
+                       
+                        <ul class="flex-column pl-2 nav">
+                            <li class="nav-item"><a class="nav-link py-1"  href="{{ url_for('administrator.get_all_clientss')}}"><span class="d-none d-sm-inline">Get All</span></a></li> 
+                            <li class="nav-item"><a class="nav-link py-1"  href="{{ url_for('administrator.get_all_userss')}}"><span class="d-none d-sm-inline">Get Clients</span></a></li>
+                            <li class="nav-item"><a class="nav-link py-1"  href="{{ url_for('administrator.get_all_administratorss')}}"><span class="d-none d-sm-inline">Get Administrators</span></a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-truncate" href="{{ url_for('administrator.add_users')}}"><i class="fa fa-user-plus"></i> <span class="d-none d-sm-inline">Add new user</span></a>
+                </li>
+                <br/>
+                {% endif %}
+                {% if session.db and session.user %}
+                <div class="dropdown-divider"></div>
+                    <button data-toggle="modal" data-target="#exampleModal5" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;
+                    outline:none;" style="background-color:transparent; border-color:transparent;" title="add new database"> 
+                        <i style="font-size:35px" class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+                <div class="dropdown-divider"></div>
+                {% endif %}
+            </ul>
+            
+</div>
+        <div class="col pt-2 col-10" style="background-color: rgb(240, 238, 238);">
+
+            {% if connection_success == False %}
+            <div class="alert alert-danger">
+                <strong>fail to connect to the database</strong> 
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endif %}
+            {% if logout == True %}
+            <div class="alert alert-danger">
+                <strong>You are louged out , please login !</strong> 
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endif %}
+            {% if logoutdb == True %}
+            <div class="alert alert-danger">
+                <strong>You are louged out from the database</strong> 
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endif %}
+            {% if register == True %}
+            <div class="alert alert-success alert-dismissible fade show">
+                <strong>register success</strong> 
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endif %}
+            {% if register == False %}
+            <div class="alert alert-danger">
+                <strong>the user name or the email already exists</strong> 
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endif %}
+            {% if insert_file_success == False %}
+            <div class="alert alert-danger">
+                <strong>File malformed</strong> 
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endif %}
+            {% if insert_file_success == True %}
+            <div class="alert alert-success alert-dismissible fade show">
+                <strong>insert {{count}} documents with success</strong> 
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endif %}
+            {% if login == False %}
+            <div class="alert alert-danger">
+                <strong>check password or username</strong> 
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endif %}
+            {% if export_success == False %}
+            <div class="alert alert-danger">
+                <strong>Export Fail</strong> 
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endif %}
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-danger"> 
+                {% for message in messages %}
+                <strong>{{ message }}</strong>
+                {% endfor %}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+            {% endif %}
+            {% endwith %}
+            
+            {% if delete_success ==True %}
+            <div class="alert alert-success alert-dismissible fade show">
+              <strong>delete Success!</strong> 
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% elif delete_success ==False %}
+            <div class="alert alert-danger">
+              <strong>delete fail ,Try to modify your query to get results</strong> 
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {%endif%}
+            {% if update_success ==True %}
+            <div class="alert alert-success alert-dismissible fade show">
+              <strong>collection update Success!</strong> 
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% elif update_success == False %}
+            <div class="alert alert-danger">
+              <strong>update fail , Try to modify your query to get results</strong> 
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {%endif%}
+            {% if insert_success ==True %}
+            <div class="alert alert-success alert-dismissible fade show">
+              <strong>insert {{count}} documents with success</strong> 
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% elif insert_success == False %}
+            <div class="alert alert-danger">
+              <strong>insert fail, Try to modify your query to get results</strong> 
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {%endif%}
+            {% if rename_success ==True %}
+            <div class="alert alert-success alert-dismissible fade show">
+              <strong>rename Success!</strong> 
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% elif rename_success == False %}
+            <div class="alert alert-danger">
+              <strong>rename fail</strong> 
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {%endif%}
+                <div class="center">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% include 'choice/create_col.html' %}
+{% include 'choice/delete_one_collection.html' %}
+{% include 'choice/add_database.html' %}
+
+<script src="{{ url_for('static',filename='js/base00.js')}}"></script>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/base0.css')}}">
+

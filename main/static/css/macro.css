@@ -1,0 +1,19 @@
+.btn.btn-default.dropdown-toggle{
+    color: black;
+}
+.nav-link{
+    color:black;
+}
+/* Hover */
+.navbar a:hover {
+    border-bottom: 1px solid currentColor !important;
+}
+/* Active */
+.navbar .active-link a {
+    border-bottom: 1px solid currentColor;
+}
+.navbar {
+  background-color: transparent;
+  border: none;
+  transition: background-color 1s ease 0s;
+}
